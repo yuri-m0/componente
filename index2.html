@@ -1,0 +1,114 @@
+<html>
+    <head><script src="https://cdn.tailwindcss.com"></script></head>
+
+    <body>
+        <div id="fundo" class="w-full h-full justify-center flex bg-blue-200 ">
+            <div id="casa" class="w-2/3 h-full  bg-white">
+                <div id="cabecalho" class="w-full h-32 bg-stone-200"> forca
+                </div>
+                <div id="lados" class="w-full h-full ">
+                    <div id="lado" class="w-full h-1/2 ">
+                        <input type="button" onclick="letra('A')" value="A" class="bg-amber-500"/>
+                        <input type="button" onclick="letra('B')" value="B" />
+                        <input type="button" onclick="letra('C')" value="C"/>
+                        <input type="button" onclick="letra('D')" value="D"/>
+                        <input type="button" onclick="letra('E')" value="E"/>
+                        <input type="button" onclick="letra('F')" value="F"/>
+                        <input type="button" onclick="letra('G')" value="G"/>
+                        <input type="button" onclick="letra('H')" value="H"/>
+                        <input type="button" onclick="letra('I')" value="I"/>
+                        <input type="button" onclick="letra('J')" value="J"/>
+                        <input type="button" onclick="letra('K')" value="K"/>
+                        <input type="button" onclick="letra('L')" value="L"/>
+                        <input type="button" onclick="letra('M')" value="M"/>
+                        <input type="button" onclick="letra('N')" value="N"/>
+                        <input type="button" onclick="letra('O')" value="O"/>
+                        <input type="button" onclick="letra('P')" value="P"/>
+                        <input type="button" onclick="letra('Q')" value="Q"/>
+                        <input type="button" onclick="letra('R')" value="R"/>
+                        <input type="button" onclick="letra('S')" value="S"/>
+                        <input type="button" onclick="letra('T')" value="T"/>
+                        <input type="button" onclick="letra('U')" value="U"/>
+                        <input type="button" onclick="letra('V')" value="V"/>
+                        <input type="button" onclick="letra('W')" value="W"/>
+                        <input type="button" onclick="letra('X')" value="X"/>
+                        <input type="button" onclick="letra('Y')" value="Y"/>
+                        <input type="button" onclick="letra('Z')" value="Z"/>
+                        
+                    </div>
+                    <div id="ladobaixo" class="h-1/2 bg-red-500 items-center justify-center"> 
+                        <div id="resultado" class="h-1/2 w-full font-xl bg-pink-500">
+                    
+                        </div>
+                        <div>
+                            <input type="button" value="Escreva uma Palavra" class="bg-white" onclick="digitarpalavra()"/>
+
+                            <input type="button" value=" Sei a resposta" class="bg-emerald-500"/>
+                        </div>    
+                    </div>
+                </div>
+                <script>
+                    var palavraDigitada = ""
+                    var palavraDividida = ""
+                    var tentativas = 10
+
+                    function digitarpalavra(){
+                        var inicio = prompt();
+                        palavraDigitada = inicio
+                        digitarpalavra2(inicio)
+                    }
+
+                    function digitarpalavra2(palavra){  
+                        var sagaz = JSON.parse(JSON.stringify(palavraDigitada));
+                        palavraDividida = sagaz.split("")
+                        palavraDividida.fill("_")
+                        exibir(palavraDividida)
+
+                    }
+                    
+                    function letra(palavra){
+                        console.log(palavraDividida)
+                        if(tentativas > 0 && palavraDividida.includes("_")){
+                        var split = palavraDigitada.split("")
+                        palavraDividida.map( (item,index) => {
+                            if(split[index].toUpperCase() == palavra){
+                                palavraDividida[index] = palavra;
+                            }else{
+                                palavraDividida[index] = palavraDividida[index]
+                            }
+
+                        })
+                        tentativas--
+                        exibir(palavraDividida);
+                        }else{
+                            resultado(false)
+                        }
+                        if(!(palavraDividida.includes("_"))){
+                            console.log("abc")
+                            resultado(true);
+                            tentativas = 0
+                        } 
+
+                    }
+                    function exibir(resu){
+                        document.getElementById("resultado").innerHTML = resu
+
+                    }
+
+
+                    function resultado(resultado){
+                        if(resultado){
+                            
+                            alert("PARABENS")
+
+                        }else{
+                        alert("PERDEU AHAHAHHAHAHAHAHAHAHAHAHAHAHHAHAHAHAHA")
+                        }
+                
+
+                    }
+
+
+
+                </script>    
+    </body>

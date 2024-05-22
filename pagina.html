@@ -1,0 +1,234 @@
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body>
+
+        
+
+        <div class="h-32 w-full bg-slate-200 flex items-center justify-center " >              
+            <input id="cabacalho" type="text" class="h-1/2 w-2/4" onkeyup="pes(event)" >
+        </div>
+
+        <div id="nnn" class=" w-full bg-slate-200 flex items-center justify-center "></div>
+
+        <div id="fundo" class="h-full w-full">
+           
+        </div>
+        <script>
+           /* var filme={
+                terror:[{nome: "the filme aterrorizante", duracao:"30min" }, {nome:"the filme a vinganca do aterrorizado" , duracao:"33min"}, {nome:"the filme a volta do terror", duracao:"40min" } ],
+                comedia:[{nome: "the filme so que hilario", duracao: "34min"}, {nome:"the filme so que muito hilario", duracao: "36min"}, {nome: "the filme so que nao tao hilario quanto o anterior", duracao:"32min" } ],
+                acao:[{nome: "the filme so que armas de fogo" ,duracao:"44min"}, {nome: "the filme soque com carros", duracao:"50min"}, {nome: "the filme soque com carros e amrmas de fogo", duracao:"55min"} ],
+                drama:[{nome: "the filme so que armas de fogo" ,duracao:"44min"}, {nome: "the filme soque com carros", duracao:"50min"}, {nome: "the filme soque com carros e amrmas de fogo", duracao:"55min"} ]
+                
+                
+            }
+            Object.keys(filme).map(function(item){
+                
+                var cat=`<div id="${item}" class="h-1/4 w-full bg-blue-200 ">
+                    <div id="" class="h-[25] w-full bg-green-300 text-xl"> ${item} </div>
+    
+                    <div id="imagem" class="h-full w-full bg-pink-300 flex justify-center items-center " >
+                    <div id="filme" class="h-3/4 w-[150] bg-amber-200 ml-10"></div>
+                    
+                    </div>
+                </div>`
+                document.getElementById("fundo").innerHTML+=cat
+            })*/
+            
+            function pes (event){
+                var target=event.target.value
+                var key=event.key
+
+                if(key=="Enter" && target!=""){
+                    fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${target}`)
+                    .then(item => item.json())
+                    .then(item => {
+                        document.getElementById("fundo").innerHTML = "";
+                        exiberfil(item.results)
+                    })
+
+                }
+                if(target==""){
+                    document.getElementById("fundo").innerHTML = "";
+                    con.buscargen()
+
+                     
+                }
+            function exiberfil(filmes){
+                var listafim = "";
+                filmes.map(itens => {
+                    var fil =`
+                    <div id="tudo" class="h-[150px] w-[250px] mx-5 bg-green-200 " titulo=${itens.title} >
+                                        <div id="img" class="h- w-full bg-blue-200">
+                                            <div> <img src='https://image.tmdb.org/t/p/original/${itens.backdrop_path}' /> </div>
+                            
+                                        </div>
+                                        <div id="titulo" class=" w-full bg-slate-200 ">
+                                            <h1>${itens.title}</h1>    
+                                        </div>
+                                        <div id="ano" class="h-[25px] w-full bg-pink-200">
+                                            <p>${itens.release_date}</p>    
+                                        </div>
+                                    </div>
+                    `
+                    listafim += fil;
+                })
+
+                var filmesgeral= 
+                `<div id="fil" class=" w-full bg-blue-200 ">
+                    <div id="" class="h-[25] w-full bg-green-300 text-xl">  </div>
+    
+                    <div id="imagem" class="h-full w-full bg-pink-300 flex flex-wrap justify-center items-center " >
+                        
+                            ${listafim}
+                        
+                    
+                    </div>
+                    </div>`
+                    document.getElementById("fundo").innerHTML+=filmesgeral
+                
+            }
+            };
+            function fechar(){
+                document.getElementById("nnn").style.display="none"
+            }
+
+            function showPopup(itens){
+                console.log(itens)
+                fetch( `https://api.themoviedb.org/3/movie/${itens}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb` )
+                .then(ppsspp => ppsspp.json())
+                .then(ppsspp => { console.log(ppsspp)
+
+                    var divs = "";
+
+                    var genres = ppsspp.genres.map( psp => {
+                        divs += `<div class="w-full">${psp.name}</div>`
+                    } )
+
+                    var productionCompany = ppsspp.production_companies.map( psp => {
+                        divs += `<i><div class="w-full">${psp.name}</div></i>`
+                    } )
+
+                    var productionCountries = ppsspp.production_countries.map( psp => {
+                        divs += `<i><div class="w-full">${psp.name}</div></i>`
+                    } )
+
+                    var spokenLanguages = ppsspp.spoken_languages.map( psp => {
+                        divs += `<i><div class="w-full">${psp.name}</div></i>`
+                    } )
+
+                    var popouoData =    `
+                        <div id="tudo" class="h-[600] w-[950] bg-green-200 fixed top-[25%] "> 
+                            <div id="negar" class="w-full h-10 absolute bg-pink-200 -mt-10" >
+                                ${ppsspp.title}
+                            <div id="fe" class="h-full w-10 bg-red-500 absolute right-0 top-0" onclick="fechar()">
+                                
+                            </div>
+
+                            </div>
+                            <div class="h-1/2 w-full bg-amber-200"> 
+                                <img class="h-full w-full" src='https://image.tmdb.org/t/p/original/${ppsspp.backdrop_path}' />
+                            </div>
+                            <div class="h-1/2 w-full bg-pink-200">
+                                ${ppsspp.overview}
+                                <b>${divs}</b>
+                            </div>
+                        </div>
+                    `
+                    document.getElementById("nnn").innerHTML = "";
+                    document.querySelector("#nnn").insertAdjacentHTML('beforeend',popouoData );
+                    document.getElementById("nnn").style.display="block"
+                })
+
+            };
+
+            var con = {
+                mostrar: function(categoria,filmes){
+
+                    var lista= ""
+                    filmes.map( itens =>{
+                        var fil=`
+                                    <div id="tudo" class="h-[150px] w-[250px] mx-5 bg-green-200  " onclick="showPopup(${itens.id})" titulo=${itens.title} >
+                                        <div id="img" class="h- w-full bg-blue-200">
+                                            <div> <img src='https://image.tmdb.org/t/p/original/${itens.backdrop_path}' /> </div>
+                            
+                                        </div>
+                                        <div id="titulo" class=" w-full bg-slate-200 ">
+                                            <h1>${itens.title}</h1>    
+                                        </div>
+                                        <div id="ano" class="h-[25px] w-full bg-pink-200">
+                                            <p>${itens.release_date}</p>    
+                                        </div>
+                                    </div>`
+
+                        lista += fil;
+                    })
+
+                    var cat=`<div id="${categoria.id}" class=" w-full bg-blue-200 ">
+                    <div id="" class="h-[25] w-full bg-green-300 text-xl"> ${categoria.name} </div>
+    
+                    <div id="imagem" class="h-full w-full bg-pink-300 flex flex-wrap justify-center items-center " >
+                        
+                            ${lista}
+                        
+                    
+                    </div>
+                    </div>`
+                    document.getElementById("fundo").innerHTML+=cat
+
+                },
+                buscargen  : function (){
+                    fetch(' https://api.themoviedb.org/3/genre/movie/list?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb')
+                    .then(function(dados){
+                        return dados.json();
+                    })
+                    .then(function(dados){
+                        dados.genres.map((cat) => {
+                            cat["filmes"]=[];
+                            con[cat.name]= cat;
+
+                            fetch(`https://api.themoviedb.org/3/genre/${cat.id}/movies?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`)
+                            .then(function(dados){
+                                return dados.json();
+                            })
+                            .then(function(filmes){
+                               con.mostrar(cat,filmes.results)
+                            })
+
+                        })
+                    })
+                    
+                },
+
+                popoluargeneros : function (query){
+                    fetch(`https://api.themoviedb.org/3/genre/${query}/movies?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`)
+                    .then(function(dados){
+                            return dados.json();
+                        })
+                    .then(function(dados){
+                        console.log(dados)
+                    })
+                },
+                
+            
+                buscar  : function(query){
+                    fetch('https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=star%20wars')
+                    .then(function(dados){
+                        return dados.json();
+                    })
+                    .then(function(dados){
+                        dados.results.map(function(filme){
+                            document.querySelector("#resultados").insertAdjacentHTML('beforeend',filme.original_title + '<br/>' );
+                        })
+                    })
+                }
+            }
+            con.buscargen()
+          </script>
+    
+    </body>
+
+</html>

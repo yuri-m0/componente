@@ -1,0 +1,77 @@
+<hatml>
+    <head><script src="https://cdn.tailwindcss.com"></script></head>
+
+    <body>
+ <div id="fundo" class=" h-full w-full">
+    <div id="cima" class="h-1/2 bg-blue-200">
+        <div id="acima" class="h-1/3 items-center justify-center flex bg-amber-500 ">
+            <div class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+            <div class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+            <div class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+            <div class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+        </div>
+
+        <div id="meio" class="h-1/3 bg-black items-center justify-center flex">
+            <div class="w-[150px] h-[150px] bg-blue-200 mx-[150px]">
+                <img src="">
+            </div>
+            <div class="w-[150px] h-[150px] bg-blue-200 mx-[150px]">
+                <img scr="">
+            </div>
+            <div class="w-[150px] h-[150px] bg-blue-200 mx-[150px]">
+                <img src="">
+            </div>
+            <div class="w-[150px] h-[150px] bg-blue-200 mx-[150px]">
+                <img src="">
+            </div>
+        </div>
+
+        <div id="abaixo" class="h-1/3 flex justify-center bg-emerald-500">
+            <input id="v1" peca="0" type="number" onkeyup="setup.gerarValor(this)"></input>
+            <input id="v2" peca="1" type="number" onkeyup="setup.gerarValor(this)"></input>
+            <input id="v3" peca="2" type="number" onkeyup="setup.gerarValor(this)"></input>
+            <input id="v4" peca="3" type="number" onkeyup="setup.gerarValor(this)"></input>
+        </div>
+    <div id="baixo" class="h-full bg-amber-200 flex">
+        <div id="nome" class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+        <div id="qtd" class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+        <div id="prc" class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+        <div id="total" class="w-[150px] h-[50px] bg-blue-200 mx-[150px]"></div>
+    </div>
+    </div>
+ </div>
+ <script>
+    var setup ={
+pecas : [
+        {nome:"processador",valor:10, valorFinal:0,qtd:0},
+        {nome:"placaVid",valor:100, valorFinal:0,qtd:0},
+        {nome:"memoria",valor:10, valorFinal:0,qtd:0},
+        {nome:"fonte",valor:10, valorFinal:0,qtd:0}
+    ],
+gerarTotal: function(){
+    var total = this.pecas[0].valorFinal + this.pecas[1].valorFinal + this.pecas[2].valorFinal + this.pecas[3].valorFinal
+    this.imprimirResu(total)
+},
+gerarValor: function(elemento){
+    var indice = elemento.getAttribute("peca") //0
+    var qtd = elemento.value //1
+    this.pecas[indice].qtd = qtd
+    this.pecas[indice].valorFinal = this.pecas[indice].valor * this.pecas[indice].qtd
+    this.gerarTotal()
+},
+imprimirResu: function(total){
+    document.getElementById("nome").innerHTMl = ""
+    document.getElementById("qtd").innerHTML = ""
+    document.getElementById("prc").innerHTML = ""
+    document.getElementById("total").innerHTML = ""
+    this.pecas.map(function(item){
+        document.getElementById("nome").innerHTMl += item.nome
+        document.getElementById("qtd").innerHTML += item.qtd
+        document.getElementById("prc").innerHTML += item.valorFinal
+    })
+    document.getElementById("total").innerHTML = total
+}
+}
+ </script>
+    </body>
+</hatml>

@@ -1,0 +1,57 @@
+<html>
+        <head><script src="https://cdn.tailwindcss.com"></script></head>
+
+        <body>
+            <script>
+                function gerarnumero(){
+                    var lista=[];
+                    for(var i=0; i<6; i++){
+                      var meganumeros=  Math.floor(math.random()*60)+1;
+                      if(lista.includes(meganumeros)){
+                        console.log("ja existe")
+                      }else{
+                        lista.push(meganumeros);
+                      }
+                    }
+                    exibirhtml(lista);
+                }
+                function exibirhtml(numeros){
+                    var numeoshtml= ""
+                    for(var x=0; x ){
+
+                    }
+
+                }
+                    
+
+
+            </script>
+                <div id="fundo" class="w-full h-full justify-center flex bg-blue-200 ">
+                    <div id="casa" class="w-2/3 h-full  bg-white">
+                        <div id="cabecalho" class="w-full h-32 bg-stone-200">
+                        </div>
+                        <div id="lados" class="w-full h-full flex ">
+                            <div id="lado" class="w-1/2 h-full ">
+                                <input type="button" class="bg-blue-200 text-white sort-purple-500 text-center" onclick="gerarnumero()" value="Gerar numero">
+                                    
+                                </input>
+
+                                </div>
+                            <div id="lado2" class="w-1/2 h-full"></div>
+                        </div>
+                        
+                    </div>
+                    
+
+                </div>
+
+        </body>
+
+
+
+
+
+
+
+
+</html>

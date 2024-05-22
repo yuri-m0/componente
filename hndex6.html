@@ -1,0 +1,72 @@
+<html>
+    <head><script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="/assets/css/index6.css">
+        <link rel="stylesheet" href="/cadastro.html">
+    </head>
+
+    <body>
+        <script>
+
+            localStorage.setItem("usuario","yuri")
+            localStorage.setItem("senha","verde")
+
+            function armazenamento(){
+                var usuarion= document.getElementById("usu").value
+                var senhan= document.getElementById("sen").value
+                var usuarioloc= localStorage.getItem("usuario")
+                var senhaloc= localStorage.getItem("senha")
+                var dados= localStorage.getItem("dados")
+                var dados2= JSON.parse(dados)
+
+                if(usuarion == dados2.usuario && senhan == dados2.senha ){
+                    alert("esta tudo ok")
+                    location.href="pagina.html"
+                }
+          
+                else if(usuarion == "" || senhan == "" ){
+                    alert("nao tem nada em um dos campos")
+                }
+               
+                else{
+                    alert("saia imetiatemente")
+                }
+            }
+
+            
+
+        </script>
+
+        <div id="fundo" class="h-full w-full bg-amber-200 flex justify-center items-center ">
+            <div id="login" class="h-[450px] w-[600px] rounded-lg bg-pink-200/20 shadow-lg">
+                <div id="cabecalho" class="h-10 w-full  text-4xl flex justify-center items-center" >
+                    login
+                </div>
+                    
+                <div id="1" class="h-1/3 w-full  flex justify-center items-center " >
+                    <div id="texto" class="h-14 w-3/4 text-2xl">
+                        usuario
+                        <input id="usu" required type="text" class="h-full w-full " list="cat">
+                        <datalist id="cat" >
+                            <option>grante</option>
+                            <option>enorme</option>
+                        </datalist>
+                    </div>
+                </div>
+                <div id="2" class="h-1/3 w-full  flex justify-center items-center">
+                    <div id="senha" class="h-14 w-3/4 text-2xl">
+                        senha
+                        <input id="sen" required type="password" class="h-full w-full">
+                    </div>
+                </div>
+                <div id="3" class="h-1/3 w-full  flex justify-center items-center">
+                    <a href="cadastro.html" class="text-2xl">  cadastro </a>
+                    <div id="butao" class="h-14 w-2/4 bg-pink-200 flex justify-center items-center text-2xl rounded-lg">
+                        <input type="submit" class="h-full w-full" onclick="armazenamento()" value="ok"> </input>
+                    </div>
+                
+                </div>       
+            </div>
+        </div>
+
+    </body>
+</html>

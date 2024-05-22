@@ -1,0 +1,58 @@
+<html>
+    <head><script src="https://cdn.tailwindcss.com"></script></head>
+
+    <body>
+
+        <script>
+            var setup = {
+                listadefilmes: [] ,
+                pesquisar: function(valor){
+                        var listafiltrada= this.listadefilmes.filter(item => {
+                            return item.title.toLowerCase().includes(valor) ? true : false
+                        })
+                        this. exibir(listafiltrada)
+                },
+                exibir: function(lista){
+                    document.getElementById("lado2").innerHTML = "";
+                    lista.map( function(item) {
+                        document.getElementById("lado2").innerHTML += item.title + "<br/>"
+                    })
+                }
+
+
+            }
+
+            fetch ("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=star%20wars")
+            .then (function(resuldado){
+                return resuldado.json();
+            })
+
+            .then (function(resuldado){
+                setup.listadefilmes = resuldado.results
+
+                setup.listadefilmes.map(function(iten){
+                document.getElementById("lado").innerHTML += iten.title + "<br/>" ;
+                })
+
+                
+            })
+        </script>
+
+    <div id="fundo" class="w-full h-full justify-center flex bg-blue-200 ">
+    <div id="casa" class="w-2/3 h-full  bg-white">
+        <div id="cabecalho" class="w-full h-32 bg-stone-200">
+        </div>
+        <div id="lados" class="w-full h-full flex ">
+            <div id="lado" class="w-1/2 h-full "></div>
+            <div id="lado2" class="w-1/2 h-full"></div>
+        </div>
+
+
+
+
+    </body>
+
+
+
+
+</html>

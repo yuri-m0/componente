@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Jersey+10+Charted&display=swap" rel="stylesheet">
+
+
+    </head>
+
+    <body>
+        <div id="fundo" class="h-full w-full">
+            <div id="titulo " class="h-1/5 w-full bg-blue-200 flex items-center justify-center">
+                <h1 id="tit" class="text-8xl">Lista do que fazer</h1>
+            </div>
+            <div id="butoa" class="h-2/5 w-full bg-blue-200 flex justify-center items-center ">
+                <input id="texto" type="text" class="h-15 w-[900] rounded-lg p-2 text-4xl"></input>
+                <input type="button" class="h-[56px] w-[80px] bg-pink-500 rounded-lg m-2 text-4xl" value="+" onclick="adicionar()"/>
+            </div>
+            <div id="resultado" class="h-2/5 w-full bg-blue-200 flex justify-center items-center">
+                <div id="res" class="h-[300] w-[600] bg-stone-200 rounded-lg"></div>
+            </div>
+        </div>
+        <script>
+            function adicionar(){
+                var data = new Date().getMilliseconds()
+                var montadora = document.getElementById("texto").value
+                document.getElementById("res").innerHTML += `<div id="${data}" class="my-2 text-2xl rounded-lg p-2"> ${montadora} <input type="button" class="h-15 w-10 bg-pink-500 text-xl rounded-lg" value="-" onclick="remover('${data}')"/> </div>`
+        }
+            function remover(data){
+                document.getElementById(data).remove()
+            }
+        </script>
+        <style>
+            
+                
+            
+
+            html{
+            font-family: "Caveat", cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            }
+
+
+        </style>
+            
+    </body>
+</html>
